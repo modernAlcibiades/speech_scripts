@@ -15,7 +15,7 @@ def normalize_file(fname, outfname, script='./normalize.v1.sh', lower=False, upp
       keys.append(k)
       txts.append(txt)
     to_tr = '\n'.join(txts)
-    p = Popen([script], stdin=PIPE, stdout=PIPE)
+    p = Popen(script, shell=True, stdin=PIPE, stdout=PIPE)
     if lower:
       out_txt = p.communicate(to_tr.encode('utf-8'))[0].decode('utf-8').lower().split('\n')
     elif upper:

@@ -60,7 +60,7 @@ def convert_files(fnames, outpath, jobname='all', augmenting_dict = {}, keep_wor
 # Collect suffixed files in directory tree
 def collect_files_in_dir(inpath, outpath, same_dir = False, suffix='trans.raw'):
   fnames = []
-  for root, dirs, files in os.walk(path):
+  for root, dirs, files in os.walk(inpath):
     if same_dir:
       outpath = root
     fnames += [(os.path.join(root, f), os.path.join(outpath, f+'.out')) for f in files if f.endswith(suffix)]
@@ -87,7 +87,7 @@ def run(args):
   # Find all files in the directory trees
   if args.indirs != None:
     for d in args.indirs:
-      allfnames.extend(collect_files_in_dir(d, args.out, args.same_dir, args.file_extension))
+      allfnames.extend(collect_files_in_dir(d, args.outdir, args.same_dir, args.file_extension))
   # Find individual files
   if args.files != None:
     if args.same_dir:
